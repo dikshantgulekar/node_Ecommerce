@@ -1,0 +1,65 @@
+<%- include('header')%>
+
+<!-- <h1>HELLO CART</h1> -->
+
+<section id="cart_items">
+    <% if(status){ %>
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+              <li><a href="/">Home</a></li>
+              <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Item</td>
+                        <td class="description"></td>
+                        <td class="price">Price</td>
+                        <td class="quantity">Discount</td>
+                        <td class="total">Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% data.forEach(function(obj){%>
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img width="75" src="/public/products/<%= obj.filepath%>" alt=""></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href=""><%= obj.productName%></a></h4>
+                            <p>Web ID: 1089772</p>
+                        </td>
+                        <td class="cart_price">
+                            <p><%= obj.price%></p>
+                        </td>
+                        <td class="cart_quantity">
+                           <p><%= obj.discount%>%</p>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price"><%= obj.price - (obj.price*obj.discount/100)%></p>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <hr/>
+       <form action="/payment-action" method="post" >
+        <input type="text" name="firstname"/><br>
+        <input type="text" name="lastname"/><br>
+        <input type="email" name="email"/><br>
+        <input type="text" name="phone"/><br>
+        <input type="text" name="amount"/><br>
+        <textarea name="productinfo" id=""></textarea><br>
+        <button>PAY</button>
+        </form>
+    </div>
+    <% }%>
+       
+</section> <!--/#cart_items-->
+
+<%- include('footer')%>
